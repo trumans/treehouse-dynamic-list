@@ -1,6 +1,13 @@
 # treehouse-dynamic-list
 
+
+PRIMARY FEATURES
+
 List of items
 - Add items
-- Reorder lines via a Up or Down button on each items
+- Change order of lines
 - Remove line
+
+CODE EXAMPLES
+
+Implement Up and Down arrows to change item sequence in a list

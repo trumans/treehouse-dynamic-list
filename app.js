@@ -66,7 +66,7 @@ ul.addEventListener('click', function(event) {
     toggleUpDownButtonColors(ul, 'default');
 
     let btn = event.target;
-    let li = event.target.parentNode;
+    let li = event.target.parentElement;
     // handle UP button
     if ( btn.className === "upButton" ) {
       let prevLi = li.previousElementSibling;

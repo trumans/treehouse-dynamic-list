@@ -22,6 +22,24 @@ function addButtonsToItem(li) {
   li.appendChild(remove);
 }
 
+// Toogle the colors on the  Up button on first item and Down button on last item
+//   if 'default' then enable CSS default.
+//   if 'gray' then set color and background to gray
+function toggleUpDownButtonColors(ul, state) {
+  let setting;
+  if ( state === 'default' ) {
+    setting = '';
+  } else {
+    setting = 'lightgray';
+  }
+  let first = ul.firstElementChild.querySelector('.upButton');
+  first.style.color = setting;
+  first.style.backgroundColor = setting;
+  let last = ul.lastElementChild.querySelector('.downButton');
+  last.style.color = setting;
+  last.style.backgroundColor = setting;
+}
+
 renameButton.addEventListener('click', () => {
   listDesc.textContent = renameText.value;
   renameText.value = '';
@@ -30,17 +48,23 @@ renameButton.addEventListener('click', () => {
 for (item of ul.children) {
   addButtonsToItem(item);
 }
+toggleUpDownButtonColors(ul, 'gray');
 
 addItemButton.addEventListener('click', () => {
   let newItem = document.createElement('li');
   newItem.textContent = addItemText.value;
   addButtonsToItem(newItem);
+  toggleUpDownButtonColors(ul, 'default');  // remove gray fronm buttons
   ul.appendChild(newItem);
+  toggleUpDownButtonColors(ul, 'gray');  // add gray to new item
   addItemText.value = '';
 } );
 
 ul.addEventListener('click', function(event) {
   if ( event.target.tagName === "BUTTON" ) {
+    // remove gray from buttoms on first and last items
+    toggleUpDownButtonColors(ul, 'default');
+
     let btn = event.target;
     let li = event.target.parentNode;
     // handle UP button
@@ -61,5 +85,8 @@ ul.addEventListener('click', function(event) {
     if ( btn.className === "removeButton" ) {
       ul.removeChild(li);
     }
+
+    // reset buttons on new first & last items
+    toggleUpDownButtonColors(ul, 'gray');
   }
 } );
